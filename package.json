@@ -1,0 +1,30 @@
+{
+  "name": "passport-tqq",
+  "version": "0.0.1",
+  "description": "Tencent QQ authentication strategy for Passport.",
+  "author": {
+    "name": "Heroic Yang",
+    "email": "me@heroicyang.com",
+    "url": "http://heroicyang.com/" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:heroicyang/passport-tqq.git"
+  },
+  "bugs": {
+    "url": "https://github.com/heroicyang/passport-tqq/issues"
+  },
+  "main": "./lib/passport-tqq",
+  "dependencies": {
+    "passport-oauth": "~0.1.x"
+  },
+  "engines": {
+    "node": ">=0.6",
+    "npm": ">=1.0"
+  },
+  "licenses": [{
+    "type": "MIT",
+    "url": "http://www.opensource.org/licenses/MIT" 
+  }],
+  "keywords": ["passport", "qq", "tencent", "auth", "oauth2", "oauth", "authn", "authentication", "identity"]
+}
