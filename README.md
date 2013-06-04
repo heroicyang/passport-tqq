@@ -1,17 +1,68 @@
 # Passport-TQQ
 
-[Passport](http://passportjs.org/) strategy for authenticating with [Tencent QQ](http://www.qq.com/)
-using the OAuth 2.0 API.
-
-This module lets you authenticate using QQ in your Node.js applications.
-By plugging into Passport, QQ authentication can be easily and
-unobtrusively integrated into any application or framework that supports
-[Connect](http://www.senchalabs.org/connect/)-style middleware, including
-[Express](http://expressjs.com/).
+适用于[Passport](http://passportjs.org/)的[Tencent QQ](http://www.qq.com/)登录认证策略。
 
 ## Install
 
     $ npm install passport-tqq
+
+## Usage
+
+#### Configure Strategy
+
+  passport.use(new TqqStrategy({
+      clientID: QQ_APP_ID,
+      clientSecret: QQ_APP_KEY,
+      callbackURL: "http://localhost:3000/auth/qq/callback"
+    },
+    function(accessToken, refreshToken, profile, done) {
+      User.findOrCreate({ qqId: profile.id }, function (err, user) {
+        return done(err, user);
+      });
+    }
+  ));
+
+#### Authenticate Requests
+
+  // QQ登录认证时 `state` 为必填参数
+  // 系client端的状态值，用于第三方应用防止CSRF攻击，成功授权后回调时会原样带回
+  app.get('/auth/qq', function (req, res, next) {
+    req.session = req.session || {};
+    req.session.authState = crypto.createHash('sha1')
+                              .update(-(new Date()) + '')
+                              .digest('hex');
+    passport
+      .authenticate('qq', { 
+        state: req.session.authState 
+      })(req, res, next);
+  });
+
+  app.get('/auth/qq/callback', function (req, res, next) {
+    // 通过比较认证返回的`state`状态值与服务器端`session`中的状态值
+    // 决定是否继续本次授权
+    if(req.session && req.session.authState 
+          && req.session.authState === req.query.state) {
+      passport
+        .authenticate('qq', { 
+          failureRedirect: '/login' 
+        })(req, res, next);
+    } else {
+      return next(new Error('Auth State Mismatch'))
+    }
+  },
+  function(req, res) {
+    res.redirect('/');
+  });
+
+#### Extended Permissions
+
+可以配置用户授权时向用户显示的可进行授权的列表。
+
+  app.get('/auth/qq',
+      passport.authenticate('qq', {
+        state: 'random state value',
+        scope: ['get_user_info', 'list_album'] 
+      }));
 
 ## Credits
 
