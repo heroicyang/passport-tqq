@@ -89,7 +89,7 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-require('http').createServer(app).listen(80);
+require('http').createServer(app).listen(3000);
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
