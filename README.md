@@ -9,7 +9,7 @@
 ## Usage
 
 #### Configure Strategy
-
+```
   passport.use(new TqqStrategy({
       clientID: QQ_APP_ID,
       clientSecret: QQ_APP_KEY,
@@ -21,9 +21,9 @@
       });
     }
   ));
-
+```
 #### Authenticate Requests
-
+```
   // QQ登录认证时 `state` 为必填参数
   // 系client端的状态值，用于第三方应用防止CSRF攻击，成功授权后回调时会原样带回
   app.get('/auth/qq', function (req, res, next) {
@@ -53,16 +53,18 @@
   function(req, res) {
     res.redirect('/');
   });
-
+```
 #### Extended Permissions
 
 可以配置用户授权时向用户显示的可进行授权的列表。
 
+```
   app.get('/auth/qq',
       passport.authenticate('qq', {
         state: 'random state value',
         scope: ['get_user_info', 'list_album'] 
       }));
+```
 
 ## Credits
 
