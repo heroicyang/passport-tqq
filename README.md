@@ -38,7 +38,7 @@
   });
 
   app.get('/auth/qq/callback', function (req, res, next) {
-    // 通过比较认证返回的`state`状态值与服务器端`session`中的状态值
+    // 通过比较认证返回的`state`状态值与服务器端`session`中的`state`状态值
     // 决定是否继续本次授权
     if(req.session && req.session.authState 
           && req.session.authState === req.query.state) {
@@ -47,7 +47,7 @@
           failureRedirect: '/login' 
         })(req, res, next);
     } else {
-      return next(new Error('Auth State Mismatch'))
+      return next(new Error('Auth State Mismatch'));
     }
   },
   function(req, res) {
@@ -65,6 +65,10 @@
         scope: ['get_user_info', 'list_album'] 
       }));
 ```
+
+## Examples
+
+见 [https://github.com/heroicyang/passport-tqq/tree/master/example](https://github.com/heroicyang/passport-tqq/tree/master/example)
 
 ## Credits
 

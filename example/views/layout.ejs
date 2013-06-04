@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta property="qc:admins" content="24473773645346375" />
+    <title>Passport-TQQ Example</title>
+  </head>
+  <body>
+    <% if (!user) { %>
+      <p>
+      <a href="/">Home</a> | 
+      <a href="/auth/qq">Log In With QQ</a>
+      </p>
+    <% } else { %>
+      <p>
+      <a href="/">Home</a> | 
+      <a href="/account">Account</a> | 
+      <a href="/logout">Log Out</a>
+      </p>
+    <% } %>
