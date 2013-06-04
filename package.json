@@ -1,6 +1,6 @@
 {
   "name": "passport-tqq",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Tencent QQ authentication strategy for Passport.",
   "author": {
     "name": "Heroic Yang",
