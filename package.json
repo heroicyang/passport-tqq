@@ -2,7 +2,7 @@
   "name": "passport-tqq",
   "version": "0.0.2",
   "description": "Tencent QQ authentication strategy for Passport.",
-  "keywords": ["passport", "qq", "tencent", "auth", "oauth2", "oauth", "authentication"]，
+  "keywords": ["passport", "qq", "tencent", "auth", "oauth2", "oauth", "authentication"],
   "author": {
     "name": "Heroic Yang",
     "email": "me@heroicyang.com",
